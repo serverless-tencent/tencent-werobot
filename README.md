@@ -17,9 +17,14 @@
 安装Werobot，新建python文件，例如`app.py`：
 
 ```pyyhon
+import os
 import werobot
 
-robot = werobot.WeRoBot(token='yourtoken')
+robot = werobot.WeRoBot(token=os.environ.get('wxtoken'))
+
+robot.config['SESSION_STORAGE'] = False
+robot.config["APP_ID"] = os.environ.get('appid')
+robot.config["APP_SECRET"] = os.environ.get('secret')
 
 # @robot.handler 处理所有消息
 @robot.handler
@@ -31,6 +36,7 @@ if __name__ == "__main__":
     robot.config['HOST'] = '0.0.0.0'
     robot.config['PORT'] = 80
     robot.run()
+
 
 
 ```
@@ -64,27 +70,25 @@ $ touch serverless.yml
 ```
 
 ```yml
-WerobotTest:
-  component: '@serverless/tencent-werobot'
+Weixin_Werobot:
+  component: "@serverless/tencent-werobot"
   inputs:
-    region: ap-guangzhou
+    functionName: Weixin_Werobot
+    code: ./test
     werobotProjectName: app
     werobotAttrName: robot
-    functionName: BottleFunctionTest
-    code: ./
     functionConf:
       timeout: 10
       memorySize: 256
       environment:
         variables:
-          TEST: vale
-      vpcConfig:
-        subnetId: ''
-        vpcId: ''
-    apigatewayConf:
-      protocols:
-        - http
-      environment: release
+          wxtoken: *********
+          appid: *********
+          secret: *********
+      apigatewayConf:
+        protocols:
+          - http
+        environment: release
 
 ```
 
