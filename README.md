@@ -2,7 +2,7 @@
 
 ## 简介
 
-腾讯云 Werobot Serverless Component.
+腾讯云 Werobot Serverless Component. 关于Session只能使用云数据库或者关闭Session功能。
 
 ## 目录
 
