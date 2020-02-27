@@ -4,6 +4,7 @@ const ensureString = require('type/string/ensure')
 const random = require('ext/string/random')
 const path = require('path')
 const { Component } = require('@serverless/core')
+const fs = require('fs')
 
 const DEFAULTS = {
   handler: 'index.main_handler',
